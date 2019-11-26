@@ -11,7 +11,7 @@ basic.showLeds(`
  * The most important macro "block" specifies that a
  * block should be generated for a **exported** function.
  */
-//% color="#AA278D"
+//% color="#AA278D" block="Roboqu"
 namespace roboqu {
     //% block
     export function camlCaseTwo() {
