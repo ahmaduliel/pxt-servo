@@ -77,6 +77,7 @@ namespace expand {
     }
 
     //% block="Servo|%index|degree|%degree"
+    //%weight=10
     //%degree.min=0 degree.max=180
     //% index.fieldEditor="gridpicker" index.fieldOptions.columns=4
     export function setServo(index: Servos, degree: number) {
@@ -85,5 +86,11 @@ namespace expand {
         }
         let pulse = (((degree - DEGREEMIN) * (PULSEMAX - PULSEMIN)) / ((DEGREEMAX - DEGREEMIN) + PULSEMIN))
         setPwm(index + 7, 0, pulse)
+    }
+
+    //%block="Hello"
+    //%wight=20
+    export function testHello(){
+    
     }
 }
