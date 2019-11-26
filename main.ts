@@ -78,6 +78,7 @@ namespace expand {
 
     //% block="Servo|%index|degree|%degree"
     //%degree.min=0 degree.max=180
+    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=4
     export function setServo(index: Servos, degree: number) {
         if (!initial) {
             initPCA9685()
