@@ -14,7 +14,7 @@ basic.showLeds(`
 //% color="#AA278D" icon="\uf013" block="Roboqu"
 namespace roboqu {
     //% block
-    export function camlCaseTwo() {
+    export function Hello() {
 
     }
 }
