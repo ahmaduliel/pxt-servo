@@ -83,6 +83,6 @@ namespace expand {
             initPCA9685()
         }
         let pulse = (((degree - DEGREEMIN) * (PULSEMAX - PULSEMIN)) / ((DEGREEMAX - DEGREEMIN) + PULSEMIN))
-        setPwm(index, 0, pulse)
+        setPwm(index + 7, 0, pulse)
     }
 }
