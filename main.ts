@@ -33,7 +33,7 @@ namespace expand {
 
     let initial = false
 
-    function i2cWrite(address: number, register: number, value: number) {
+    function i2cWrite(address: number, register: number, value: number): void {
         let buffer = pins.createBuffer(2)
         buffer[1] = register
         buffer[2] = value
