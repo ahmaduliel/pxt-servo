@@ -59,7 +59,7 @@ namespace expand {
     }
 
     function setPwm(channel: number, on: number, off: number): void{
-        if (channel < 0 || channel > 15){
+        if (channel < 0 || channel > 15)
             return;
         let buffer = pins.createBuffer(5)
         buffer[0] = LED0_ON_L + 4 *channel
@@ -82,7 +82,7 @@ namespace expand {
         if (!initial) {
             initPCA9685()
         }
-        let pulse = (degree - DEGREEMIN) * (PULSEMAX - PULSEMIN) / (DEGREEMAX - DEGREEMIN) + PULSEMIN
+        let pulse = (((degree - DEGREEMIN) * (PULSEMAX - PULSEMIN)) / ((DEGREEMAX - DEGREEMIN) + PULSEMIN))
         setPwm(index, 0, pulse)
     }
 }
