@@ -17,8 +17,8 @@ namespace expand {
 
     const DEGREEMIN = 0
     const DEGREEMAX = 180
-    const PULSEMIN = 150
-    const PULSEMAX = 600
+    const PULSEMIN = 180
+    const PULSEMAX = 570
 
     export enum Servos {
         S1 = 0x08,
@@ -35,8 +35,8 @@ namespace expand {
 
     function i2cWrite(address: number, register: number, value: number): void {
         let buffer = pins.createBuffer(2)
-        buffer[1] = register
-        buffer[2] = value
+        buffer[0] = register
+        buffer[1] = value
         pins.i2cWriteBuffer(address, buffer)
     }
 
@@ -58,11 +58,11 @@ namespace expand {
         i2cWrite(PCA9685_ADDRESS, MODE1, oldmode | MODE_RESTART | MODE_A1)
     }
 
-    function setPwm(channel: number, on: number, off: number): void{
+    function setPwm(channel: number, on: number, off: number): void {
         if (channel < 0 || channel > 15)
             return;
         let buffer = pins.createBuffer(5)
-        buffer[0] = LED0_ON_L + 4 *channel
+        buffer[0] = LED0_ON_L + 4 * channel
         buffer[1] = on & 0xff
         buffer[2] = (on >> 8) & 0xff
         buffer[3] = off & 0xff
@@ -72,25 +72,25 @@ namespace expand {
 
     function initPCA9685(): void {
         i2cWrite(PCA9685_ADDRESS, MODE1, 0x00)
-        setFreq(50)
+        setFreq(60)
         initial = true
     }
 
-    //% block="Servo|%index|degree|%degree"
+    //%block="Servo|%index|degree|%degree"
     //%weight=10
     //%degree.min=0 degree.max=180
-    //% index.fieldEditor="gridpicker" index.fieldOptions.columns=4
+    //%index.fieldEditor="gridpicker" index.fieldOptions.columns=4
     export function setServo(index: Servos, degree: number) {
         if (!initial) {
             initPCA9685()
         }
-        let pulse = (((degree - DEGREEMIN) * (PULSEMAX - PULSEMIN)) / ((DEGREEMAX - DEGREEMIN) + PULSEMIN))
+        let pulse = ((degree - DEGREEMIN) * (PULSEMAX - PULSEMIN)) / (DEGREEMAX - DEGREEMIN) + PULSEMIN
         setPwm(index + 7, 0, pulse)
     }
 
-    //%block="Hello"
+    //%block="Hello2"
     //%wight=20
-    export function testHello(){
-    
+    export function testHello() {
+
     }
-}
+} 
