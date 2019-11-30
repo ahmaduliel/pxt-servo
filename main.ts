@@ -31,6 +31,18 @@ namespace expand {
         S8 = 0x01
     }
 
+    export enum Motors {
+        M1 = 0x1,
+        M2 = 0x2,
+        M3 = 0x3,
+        M4 = 0x4
+    }
+
+    export enum Dir {
+        CW = 1,
+        CCW = -1
+    }
+
     let initial = false
 
     function i2cWrite(address: number, register: number, value: number): void {
@@ -89,8 +101,36 @@ namespace expand {
     }
 
     //%block="Hello2"
-    //%wight=20
+    //%wight=9
     export function testHello() {
 
+    }
+
+    //%block="Motor|%index|dir|%dir|speed|%speed"
+    //%weight=8
+    //%speed.min=0 speed.max=100
+    //%dir.fieldEditor="gridpicker" dir.fieldOption.colums=2
+    //%index.fieldEditor="gridpicker" index.fieldOptions.colums=4
+    export function setMotor(index: Motors, direction: Dir, speed: number) {
+        if(!initial){
+            initPCA9685()
+        }
+        speed = speed * 40.96 * direction
+        if(speed >= 4096){
+            speed = 4096
+        }
+        if(speed <= -4096){
+            speed = -4096
+        }
+        let mPlus = (4 - index) * 2 + 1
+        let mMin = (4 - index) * 2
+        if(speed <= 0){
+            setPwm(mPlus, 0, speed)
+            setPwm(mMin, 0, 0)
+        }
+        else {
+            setPwm(mPlus, 0, 0)
+            setPwm(mMin, 0, -speed)
+        }
     }
 } 
