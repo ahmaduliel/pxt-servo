@@ -100,12 +100,6 @@ namespace expand {
         setPwm(index + 7, 0, pulse)
     }
 
-    //%block="Hello2"
-    //%wight=9
-    export function testHello() {
-
-    }
-
     //%block="Motor|%index|dir|%dir|speed|%speed"
     //%weight=8
     //%speed.min=0 speed.max=100
